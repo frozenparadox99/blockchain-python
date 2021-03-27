@@ -118,7 +118,7 @@ def main():
     genesis_block = Block.genesis()
     bad_block = Block.mine_block(genesis_block,'foo')
 
-    # bad_block.last_hash = 'evil_data'
+    bad_block.last_hash = 'evil_data'
 
     try:
         Block.is_valid_block(genesis_block,bad_block)
