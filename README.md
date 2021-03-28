@@ -22,3 +22,10 @@ Make sure you activate the virtual environment.
 ```
 python3 -m backend.app
 ```
+
+**Run a peer instance**
+Make sure you activate the virtual environment.
+
+```
+export PEER=True && python3 -m backend.app
+```
