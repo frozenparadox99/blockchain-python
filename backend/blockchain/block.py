@@ -76,7 +76,13 @@ class Block:
 
         # return Block(GENESIS_DATA['timestamp'],GENESIS_DATA['last_hash'],GENESIS_DATA['hash'],GENESIS_DATA['data'])
         return Block(**GENESIS_DATA)
-    
+    @staticmethod
+    def from_json(block_json):
+        """
+        Deserialize a block's json rep back into a block instace
+        """
+        return Block(**block_json)
+
     @staticmethod
     def adjust_difficulty(last_block,new_timestamp):
         """
