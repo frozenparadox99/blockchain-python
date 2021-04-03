@@ -32,6 +32,8 @@ def route_blockchain_mine():
     block = blockchain.chain[-1]
     pubsub.broadcast_block(block)
 
+    transaction_pool.clear_blockchain_transactions(blockchain)
+
     return jsonify(block.to_json())
 
 @app.route('/wallet/transact', methods=['POST'])
