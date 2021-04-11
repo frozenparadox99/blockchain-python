@@ -1,11 +1,45 @@
-import React from 'react'
+import React,{useState} from 'react'
+import {Button} from 'react-bootstrap'
 
 import Transaction from "./Transaction"
 import {MILLISECONDS_PY} from "../config"
 
+function ToggleTransactionDisplay({block}){
+    const [displayTransaction,setDisplayTrasaction] = useState(false)
+    const {data} = block
+
+    const toggleDisplayTransaction = () =>{
+        setDisplayTrasaction(!displayTransaction)
+    }
+
+    if(displayTransaction){
+        return (<div>
+        {
+            data.map(transaction=>(
+                <div key={transaction.id} >
+                    <Transaction transaction={transaction} />
+                </div>
+            ))
+        }
+        <br />
+        <Button variant="danger" size="sm" onClick={toggleDisplayTransaction} >
+            Hide Transaction
+        </Button>
+            </div>)
+
+    }
+
+    return (
+        <div>
+            <br />
+            <Button variant="danger" size="sm" onClick={toggleDisplayTransaction}  >Show More</Button>
+        </div>
+    )
+}
+
 function Block({block}){
 
-    const {timestamp,hash,data} = block;
+    const {timestamp,hash} = block;
     const hashDisplay = `${hash.substring(0,15)}...`
     const timestampDisplay = new Date(timestamp / MILLISECONDS_PY).toLocaleString();
 
@@ -13,15 +47,7 @@ function Block({block}){
         <div className="Block" >
             <div>Hash: {hashDisplay}</div>
             <div>Timestamp: {timestampDisplay}</div>
-            <div>
-                {
-                    data.map(transaction=>(
-                        <div key={transaction.id} >
-                            <Transaction transaction={transaction} />
-                        </div>
-                    ))
-                }
-            </div>
+            <ToggleTransactionDisplay block={block} />
         </div>
     )
 }
