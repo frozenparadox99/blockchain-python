@@ -1,35 +1,37 @@
-import React, {useState,useEffect} from "react"
-import logo from "../assets/logo.png"
-import { API_BASE_URL} from "../config"
+import React, { useState, useEffect } from "react";
+import logo from "../assets/logo.png";
+import { API_BASE_URL } from "../config";
 
-import Blockchain from "./Blockchain"
+import Blockchain from "./Blockchain";
+import ConductTransaction from "./ConductTransaction";
 
 function App() {
+  const [walletInfo, setwalletInfo] = useState({});
 
-  const [walletInfo,setwalletInfo] = useState({})
-
-  useEffect(()=>{
+  useEffect(() => {
     fetch(`${API_BASE_URL}/wallet/info`)
-    .then(response=>response.json())
-    .then(json=>setwalletInfo(json))
+      .then((response) => response.json())
+      .then((json) => setwalletInfo(json));
+  }, []);
 
-  },[])
-
-  const {address,balance} = walletInfo
+  const { address, balance } = walletInfo;
 
   return (
-    <div className="App" >
+    <div className="App">
       <img className="logo" src={logo} alt="app-logo" />
       <h3>Blockchain Frontend</h3>
       <br />
 
-      <div  className="WalletInfo" >
+      <div className="WalletInfo">
         <div>Address: {address}</div>
         <div>Balance: {balance}</div>
       </div>
       <br />
 
       <Blockchain />
+      <br />
+
+      <ConductTransaction />
     </div>
   );
 }
