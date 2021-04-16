@@ -7,6 +7,7 @@ import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 import Blockchain from "./components/Blockchain";
 import ConductTransaction from "./components/ConductTransaction";
+import TransactionPool from "./components/TransactionPool";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,6 +16,7 @@ ReactDOM.render(
         <Route path="/" exact component={App} />
         <Route path="/blockchain" component={Blockchain} />
         <Route path="/conduct-transaction" component={ConductTransaction} />
+        <Route path="/transaction-pool" component={TransactionPool} />
       </Switch>
     </Router>
   </React.StrictMode>,
